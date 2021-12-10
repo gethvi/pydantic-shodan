@@ -1,0 +1,9 @@
+pydantic_shodan.egg-info
+banners
+main.py
+download.sh
+.mypy_cache
+dist
+.idea
+venv
+__pycache__

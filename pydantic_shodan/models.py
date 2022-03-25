@@ -1581,6 +1581,98 @@ class XiaomiMiio(BaseModel):
     token: str = Field(..., title="Token")
 
 
+class SonyBravia(BaseModel):
+    interface_version: str = Field(..., title='Interface Version')
+    model_name: str = Field(..., title='Model Name')
+    mac_address: Optional[str] = Field(None, title='Mac Address')
+
+
+class PhilipsHue(BaseModel):
+    api_version: str = Field(..., title='Api Version')
+    bridge_id: str = Field(..., title='Bridge Id')
+    data_store_version: Optional[str] = Field(None, title='Data Store Version')
+    factory_new: bool = Field(..., title='Factory New')
+    mac: str = Field(..., title='Mac')
+    model_id: str = Field(..., title='Model Id')
+    name: str = Field(..., title='Name')
+    sw_version: str = Field(..., title='Sw Version')
+
+
+class EthereumP2PNeighbour(BaseModel):
+    ip: str = Field(..., title='Ip')
+    pubkey: str = Field(..., title='Pubkey')
+    tcp_port: int = Field(..., title='Tcp Port')
+    udp_port: int = Field(..., title='Udp Port')
+
+
+class EthereumP2P(BaseModel):
+    pubkey: str = Field(..., title='Pubkey')
+    tcp_port: Optional[int] = Field(None, title='Tcp Port')
+    udp_port: Optional[int] = Field(None, title='Udp Port')
+    neighbours: Optional[List[EthereumP2PNeighbour]] = Field(None, title='Neighbours')
+
+
+class MssqlSsrpInstance(BaseModel):
+    instance_name: str = Field(..., title='Instance Name')
+    is_clustered: Optional[bool] = Field(None, title='Is Clustered')
+    server_name: str = Field(..., title='Server Name')
+    tcp: Optional[int] = Field(None, title='Tcp')
+    version: str = Field(..., title='Version')
+    version_name: Optional[str] = Field(None, title='Version Name')
+
+
+class MssqlSsrp(BaseModel):
+    instances: List[MssqlSsrpInstance] = Field(..., title='Instances')
+
+
+class Ntlm(BaseModel):
+    dns_domain_name: Optional[str] = Field(None, title='Dns Domain Name')
+    fqdn: Optional[str] = Field(None, title='Fqdn')
+    netbios_computer_name: Optional[str] = Field(None, title='Netbios Computer Name')
+    netbios_domain_name: Optional[str] = Field(None, title='Netbios Domain Name')
+    os: Optional[List[str]] = Field(None, title='Os')
+    os_build: Optional[str] = Field(None, title='Os Build')
+    target_realm: Optional[str] = Field(None, title='Target Realm')
+    timestamp: Optional[int] = Field(None, title='Timestamp')
+
+
+class SiemensS7Property(BaseModel):
+    raw: str = Field(..., title='Raw')
+    value: str = Field(..., title='Value')
+
+
+class SiemensS7(BaseModel):
+    dst_tsap: str = Field(..., title='Dst Tsap')
+    identities: Dict[str, SiemensS7Property] = Field(..., title='Identities')
+    src_tsap: str = Field(..., title='Src Tsap')
+
+
+class TpLinkKasa(BaseModel):
+    alias: str = Field(..., title='Alias')
+    dev_name: str = Field(..., title='Dev Name')
+    device_id: str = Field(..., title='Device Id')
+    fw_id: Optional[str] = Field(None, title='Fw Id')
+    hw_id: str = Field(..., title='Hw Id')
+    hw_ver: str = Field(..., title='Hw Ver')
+    latitude: float = Field(..., title='Latitude')
+    longitude: float = Field(..., title='Longitude')
+    mac_address: str = Field(..., title='Mac Address')
+    model: str = Field(..., title='Model')
+    oem_id: str = Field(..., title='Oem Id')
+    sw_ver: str = Field(..., title='Sw Ver')
+    type: str = Field(..., title='Type')
+
+
+class Vnc(BaseModel):
+    protocol_version: str = Field(..., title='Protocol Version')
+    security_types: Optional[Dict[str, str]] = Field(None, title='Security Types')
+
+
+class Yeelight(BaseModel):
+    firmware_version: str = Field(..., title='Firmware Version')
+    model: str = Field(..., title='Model')
+
+
 class Banner(BaseModel):
     class Config:
         extra = Extra.forbid
@@ -1681,6 +1773,7 @@ class Banner(BaseModel):
     elastic: Optional[Elastic] = None
     etcd: Optional[Etcd] = None
     ethereum_rpc: Optional[EthereumRpc] = None
+    ethereum_p2p: Optional[EthereumP2P] = None
     ethernetip: Optional[Ethernetip] = None
     ftp: Optional[Ftp] = None
     handpunch: Optional[Handpunch] = None
@@ -1712,16 +1805,19 @@ class Banner(BaseModel):
     mongodb: Optional[Mongodb] = None
     msrpc: Optional[Msrpc] = None
     mssql: Optional[Mssql] = None
+    mssql_ssrp: Optional[MssqlSsrp] = None
     mqtt: Optional[Mqtt] = None
     nats: Optional[Nats] = None
     ndmp: Optional[Ndmp] = None
     netbios: Optional[Netbios] = None
     netgear: Optional[Netgear] = None
+    ntlm: Optional[Ntlm] = None
     ntp: Optional[Ntp] = None
     openflow: Optional[Openflow] = None
     openhab: Optional[Openhab] = None
     openwebnet: Optional[Openwebnet] = None
     pcworx: Optional[Pcworx] = None
+    philips_hue: Optional[PhilipsHue] = None
     plex: Optional[Plex] = None
     qnap: Optional[Qnap] = None
     rdp: Optional[Rdp] = None
@@ -1731,10 +1827,12 @@ class Banner(BaseModel):
     ripple: Optional[Ripple] = None
     rsync: Optional[Rsync] = None
     samsung_tv: Optional[SamsungTv] = None
+    siemens_s7: Optional[SiemensS7] = None
     smb: Optional[Smb] = None
     snmp: Optional[Snmp] = None
     sonicwall: Optional[Sonicwall] = None
     sonos: Optional[Sonos] = None
+    sony_bravia: Optional[SonyBravia] = None
     spotify_connect: Optional[SpotifyConnect] = None
     ssh: Optional[Ssh] = None
     ssl: Optional[Ssl] = None
@@ -1746,6 +1844,7 @@ class Banner(BaseModel):
     tasmota: Optional[Tasmota] = None
     telnet: Optional[Telnet] = None
     tibia: Optional[Tibia] = None
+    tp_link_kasa: Optional[TpLinkKasa] = None
     trane: Optional[Trane] = None
     ubiquiti: Optional[Ubiquiti] = None
     unitronics_pcom: Optional[UnitronicsPcom] = None
@@ -1753,8 +1852,9 @@ class Banner(BaseModel):
     vault: Optional[Vault] = None
     vertx: Optional[VertxDoor] = None
     vmware: Optional[Vmware] = None
+    vnc: Optional[Vnc] = None
     xiaomi_miio: Optional[XiaomiMiio] = None
-    ethereum_p2p: Optional[EthereumP2p] = None
+    yeelight: Optional[Yeelight] = None
 
 
 Isakmp.update_forward_refs()

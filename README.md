@@ -11,7 +11,6 @@ pip install pydantic-shodan
 
 ## Example
 ```python
-import json
 from pydantic_shodan import Banner
 
 BANNER_JSON = """
@@ -64,5 +63,5 @@ BANNER_JSON = """
 }
 """
 
-banner = Banner.parse_obj(json.loads(BANNER_JSON))
+banner = Banner.parse_raw(BANNER_JSON)
 ```

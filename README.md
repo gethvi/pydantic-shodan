@@ -2,7 +2,7 @@
 Python 3 library containing Pydantic models for parsing and validating [Shodan banners](https://datapedia.shodan.io/).
 
 ## About
-It is based on the [JSON schema](https://datapedia.shodan.io/banner.schema.json) provided by Shodan and extended with fields such as `ethereum_p2p` that are not documented in the schema but occasionally present in the banner. The library was tested with on approximately 300k banners.
+It is based on the [JSON schema](https://datapedia.shodan.io/banner.schema.json) provided by Shodan.
 
 ## Installation
 ```bash
